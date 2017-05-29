@@ -41,7 +41,7 @@ function createPostError(message) {
 function requestFetchPosts() {
   return {
     type: FETCH_POSTS_REQUEST,
-    isFetching: true
+    isFetching: true,
   };
 }
 
