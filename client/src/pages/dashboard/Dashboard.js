@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import Widget from '../../components/Widget';
 import { fetchPosts } from '../../actions/posts';
+import { fetchMy_trades } from '../../actions/my_trades';
 
 
 import s from './Dashboard.scss';
@@ -27,7 +28,7 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchPosts());
+    this.props.dispatch(fetchMy_trades());
   }
 
   convertTimeStampToDateTime(timeInSeconds) {
@@ -63,15 +64,15 @@ class Dashboard extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.props.posts && this.props.posts.map((post, index) => (
-                    <tr key={post.trade_id}>
-                      <td>{post.selector}</td>
-                      <td>{post.side}</td>
-                      <td>{this.convertTimeStampToDateTime(post.time)}</td>
-                      <td>{post.price}</td>
+                  {this.props.trades && this.props.trades.map((trade, index) => (
+                    <tr key={trade.trade_id}>
+                      <td>{trade.selector}</td>
+                      <td>{trade.side}</td>
+                      <td>{this.convertTimeStampToDateTime(trade.time)}</td>
+                      <td>{trade.price}</td>
                     </tr>
                   ))}
-                {this.props.posts && !this.props.posts.length &&
+                {this.props.trades && !this.props.trades.length &&
                   <tr>
                     <td colSpan="100">No posts yet</td>
                   </tr>
@@ -97,7 +98,7 @@ class Dashboard extends React.Component {
             }>
               <table className="table table-sm table-no-border mb-0">
                 <tbody>
-                {this.props.posts && this.props.posts.map((post, index) => (
+                {this.props.posts && this.props.posts.map((trade, index) => (
                   <tr key={post.id}>
                     <td>{new Date(post.updatedAt).toLocaleString() }</td>
                     <td><Link to="/app/posts">{post.title}</Link></td>
