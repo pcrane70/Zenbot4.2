@@ -42,5 +42,17 @@
   "resume_markers": {
     "dataSource": "MongoDb",
     "public": true
+  },
+  "sessions": {
+    "dataSource": "MongoDb",
+    "public": true
+  },
+  "my_trades": {
+    "dataSource": "MongoDb",
+    "public": true
+  },
+  "periods": {
+    "dataSource": "MongoDb",
+    "public": true
   }
 }
