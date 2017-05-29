@@ -5,8 +5,8 @@
   },
   "MongoDb": {
     "host": "localhost",
-    "port": 27018,
-    "url": "mongodb://localhost:27018/zenbot4",
+    "port": 27017,
+    "url": "mongodb://localhost:27017/zenbot4",
     "database": "zenbot4",
     "password": "",
     "name": "MongoDb",
