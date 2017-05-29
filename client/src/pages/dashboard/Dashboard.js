@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Widget from '../../components/Widget';
 import { fetchPosts } from '../../actions/posts';
 
+
 import s from './Dashboard.scss';
 
 class Dashboard extends React.Component {
@@ -44,42 +45,7 @@ class Dashboard extends React.Component {
                 <h5 className="mt-0"><Glyphicon glyph="user" className="mr-xs opacity-70"/> Users</h5>
               </div>
             }>
-              <table className="table mb-0">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Alice</td>
-                  <td>alice@email.com</td>
-                  <td><span className="label label-success">active</span></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Bob</td>
-                  <td>bob@email.com</td>
-                  <td><span className="label label-warning text-default">delayed</span></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Duck</td>
-                  <td>duck@email.com</td>
-                  <td><span className="label label-success">active</span></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Shepherd</td>
-                  <td>shepherd@email.com</td>
-                  <td><span className="label bg-dark">removed</span></td>
-                </tr>
-                </tbody>
-              </table>
+            
             </Widget>
           </Col>
           <Col sm={6}>

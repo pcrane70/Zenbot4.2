@@ -25,9 +25,6 @@ class PostList extends React.Component {
     this.props.dispatch(fetchPosts());
   }
 
-  componentDidMount() {
-  }
-
   convertTimeStampToDateTime(timeInSeconds) {
     const dateTime = new Date(timeInSeconds);
     return dateTime.toISOString();
