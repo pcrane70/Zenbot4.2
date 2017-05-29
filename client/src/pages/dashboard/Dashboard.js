@@ -12,6 +12,7 @@ import { fetchPosts } from '../../actions/posts';
 import s from './Dashboard.scss';
 
 class Dashboard extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -21,10 +22,17 @@ class Dashboard extends React.Component {
       alert3Visible: true,
       alert4Visible: true,
     };
+
+    this.convertTimeStampToDateTime = this.convertTimeStampToDateTime.bind(this);
   }
 
   componentWillMount() {
     this.props.dispatch(fetchPosts());
+  }
+
+  convertTimeStampToDateTime(timeInSeconds) {
+    const dateTime = new Date(timeInSeconds);
+    return dateTime.toISOString();
   }
 
   render() {
@@ -42,41 +50,41 @@ class Dashboard extends React.Component {
                 <div className="pull-right mt-n-xs">
                   <input type="search" placeholder="Search..." className="form-control input-sm" />
                 </div>
-                <h5 className="mt-0"><Glyphicon glyph="user" className="mr-xs opacity-70"/> Users</h5>
+                <h5 className="mt-0"><Glyphicon glyph="user" className="mr-xs opacity-70"/> Posts</h5>
               </div>
-            }>
-            
+              }>
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Selector</th>
+                    <th>Side</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.props.posts && this.props.posts.map((post, index) => (
+                    <tr key={post.trade_id}>
+                      <td>{post.selector}</td>
+                      <td>{post.side}</td>
+                      <td>{this.convertTimeStampToDateTime(post.time)}</td>
+                      <td>{post.price}</td>
+                    </tr>
+                  ))}
+                {this.props.posts && !this.props.posts.length &&
+                  <tr>
+                    <td colSpan="100">No posts yet</td>
+                  </tr>
+                }
+                {this.props.isFetching &&
+                  <tr>
+                    <td colSpan="100">Loading...</td>
+                  </tr>
+                }
+                </tbody>
+              </table>
             </Widget>
           </Col>
-          <Col sm={6}>
-            { this.state.alert1Visible &&
-              <Alert className="alert-sm" bsStyle="warning" onDismiss={() => this.setState({ alert1Visible: false })}>
-                <span className="fw-semi-bold">Warning:</span> Best check yo self, you&#39;re not looking too good.
-              </Alert>
-            }
-            { this.state.alert2Visible &&
-            <Alert className="alert-sm" bsStyle="success" onDismiss={() => this.setState({ alert2Visible: false })}>
-              <span className="fw-semi-bold">Success:</span> You successfully read this important alert message.
-            </Alert>
-            }
-            { this.state.alert3Visible &&
-            <Alert className="alert-sm" bsStyle="info" onDismiss={() => this.setState({ alert3Visible: false })}>
-              <span className="fw-semi-bold">Info:</span> This alert needs your attention, but it&#39;s not super important.
-            </Alert>
-            }
-            { this.state.alert4Visible &&
-            <Alert className="alert-sm clearfix" bsStyle="danger" onDismiss={() => this.setState({ alert4Visible: false })}>
-              <span className="fw-semi-bold">Danger:</span> Change this and that and try again.
-              <span className="pull-right">
-                <Button bsStyle="danger" bsSize="xsmall">Take this action</Button>
-                <span> or </span>
-                <Button bsSize="xsmall">Cancel</Button>
-              </span>
-            </Alert>
-            }
-          </Col>
-        </Row>
-        <Row>
           <Col sm={6}>
             <Widget title={
               <div>
@@ -109,6 +117,8 @@ class Dashboard extends React.Component {
               </table>
             </Widget>
           </Col>
+        </Row>
+        <Row>
           <Col sm={6}>
             <ListGroup>
               <Link to="/app" className="list-group-item"><Glyphicon glyph="phone" className="mr-xs opacity-70"/> Incoming calls <Badge bsStyle="danger">3</Badge></Link>
@@ -119,34 +129,6 @@ class Dashboard extends React.Component {
             </ListGroup>
           </Col>
         </Row>
-        <h3 className="mb">Some standard react-bootstrap components</h3>
-          <Row className="mb">
-            <Col sm={6}>
-              <ButtonToolbar className="mb">
-                <Button bsSize="small">Default</Button>
-                <Button bsSize="small" bsStyle="success">Success</Button>
-                <Button bsSize="small" bsStyle="info">Info</Button>
-                <Button bsSize="small" bsStyle="warning">Warning</Button>
-                <Button bsSize="small" bsStyle="inverse">Inverse</Button>
-              </ButtonToolbar>
-              <ButtonGroup className="mb">
-                <Button>1</Button>
-                <Button>2</Button>
-                <DropdownButton title="Dropdown" id="bg-nested-dropdown">
-                  <MenuItem eventKey="1">Dropdown link</MenuItem>
-                  <MenuItem eventKey="2">Dropdown link</MenuItem>
-                </DropdownButton>
-              </ButtonGroup>
-              <p>For more components please checkout <a href="https://react-bootstrap.github.io/components.html"
-                                                         target="_blank">react-bootstrap documentation</a></p>
-            </Col>
-            <Col sm={6}>
-              <ProgressBar className="progress-sm" bsStyle="success" now={40} />
-              <ProgressBar className="progress-sm" bsStyle="info" now={20} />
-              <ProgressBar className="progress-sm" bsStyle="warning" now={60} />
-              <ProgressBar className="progress-sm" bsStyle="danger" now={80} />
-            </Col>
-          </Row>
       </div>
     );
   }
